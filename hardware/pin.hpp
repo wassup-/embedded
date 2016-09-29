@@ -16,7 +16,8 @@ enum pin_mode_e
   pin_pullup,
 };
 
-extern pin_mode_e mode(int, pin_mode_e);
+extern pin_mode_e mode(analog_tag, int, pin_mode_e);
+extern pin_mode_e mode(digital_tag, int, pin_mode_e);
 
 template<typename /* Tag */, int /* Voltage */, int /* Bits */>
 class basic_pin;
@@ -47,7 +48,7 @@ public:
   handle_type handle() const { return pin_; }
 
   pin_mode_e mode() const { return mode_; }
-  void mode(pin_mode_e m) { mode_ = ::mode(pin_, m); }
+  void mode(pin_mode_e m) { mode_ = ::mode(Tag(), pin_, m); }
 
   int read()
   {
